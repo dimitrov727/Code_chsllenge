@@ -24,7 +24,7 @@ public class RobotOperations {
         int stones = 0;
         List<RobotAction> action = new ArrayList<>();
         for (int i = 1; i <= days; i++) {
-            if (i % 2 != 0){
+            if (i % 2 == 1){
                 action.add(RobotAction.DIG);
                 stones++;
             }else {
@@ -47,8 +47,20 @@ public class RobotOperations {
      * @see RobotPlan
      */
     public RobotPlan daysRequiredToCollectStones(int numberOfStones) {
+
+        List<RobotAction> plan = new ArrayList<>();
+        for (int i = 1; i <= numberOfStones; i++) {
+            plan.add(RobotAction.DIG);
+            plan.add(RobotAction.CLONE);
+        }
+        int lastIndex = plan.size()-1;
+
+        if (numberOfStones < plan.size()){
+            plan.remove(lastIndex);
+        }
+
         // TODO
-        return null;
+        return new RobotPlan(plan.size(), numberOfStones,plan);
     }
 
 }
