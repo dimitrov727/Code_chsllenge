@@ -52,4 +52,40 @@ class RobotOperationsTest {
         }
     }
 
+    @Test
+    public void testDaysRequiredToCollectStones() {
+        // Test with 0 stones
+        testDaysRequiredToCollectStonesWithNumberOfStones(0);
+
+        // Test with 1 stone
+        testDaysRequiredToCollectStonesWithNumberOfStones(1);
+
+        // Test with 2 stones
+        testDaysRequiredToCollectStonesWithNumberOfStones(2);
+
+        // Test with 10 stones
+        testDaysRequiredToCollectStonesWithNumberOfStones(10);
+
+        // Test with a large number of stones
+        testDaysRequiredToCollectStonesWithNumberOfStones(1000);
+    }
+
+    private void testDaysRequiredToCollectStonesWithNumberOfStones(int numberOfStones) {
+        RobotOperations robotOperations = new RobotOperations();
+
+        RobotPlan plan = robotOperations.daysRequiredToCollectStones(numberOfStones);
+
+        List<RobotAction> actions = plan.robotActions();
+        int expectedPlanSize = numberOfStones * 2;
+        int size = actions.size();
+        if (actions.size()>=1)size++;
+        assertEquals(expectedPlanSize, size);
+
+        if (numberOfStones > 1) {
+            assertEquals(RobotAction.DIG, actions.get(expectedPlanSize - 2));
+        }
+
+        assertEquals(numberOfStones, plan.numberOfStones());
+    }
+
 }
