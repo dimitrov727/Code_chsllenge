@@ -21,9 +21,7 @@ public final class RobotRestController {
     @PostMapping("/excavation")
     public ResponseEntity<RobotPlan> excavateStones(@RequestParam Integer numberOfDays) {
         RobotPlan plan = new RobotOperations().excavateStonesForDays(numberOfDays);
-        // TODO
         return new ResponseEntity<>(plan,HttpStatus.OK);
-        //throw new ErrorResponseException(HttpStatus.I_AM_A_TEAPOT);
     }
 
     /**
@@ -34,8 +32,7 @@ public final class RobotRestController {
 
         RobotPlan plan = new RobotOperations().daysRequiredToCollectStones(numberOfStones);
         return new ResponseEntity<>(plan, HttpStatus.OK );
-        // TODO
-        //throw new ErrorResponseException(HttpStatus.I_AM_A_TEAPOT);
+
     }
 
 }
